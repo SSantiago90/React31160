@@ -1,17 +1,11 @@
-import NavBar from './components/NavBar';
+import './App.css';
 
 function App() {
   return (
-    <div>
-      <header>
-       <NavBar/>
+    <div className="App">
+      <header className="App-header">
+       <h1>Mi proyecto</h1>       
       </header>
-      <section>
-        
-        <h1 className='className="text-3xl font-bold underline"'>
-          Mi proyecto
-        </h1>       
-      </section>
     </div>
   );
 }
