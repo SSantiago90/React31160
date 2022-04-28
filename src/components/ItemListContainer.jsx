@@ -1,23 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import moviesDB from '../data/movies';
 import ItemList from './ItemList';
+import { useParams } from 'react-router-dom';
 
-function getMovies() {
+function getMovies(categoryid) {
   return new Promise( (resolve, reject) => {
     setTimeout(() => {
-      resolve(moviesDB);
-    }, 2000);
+      if (categoryid !== undefined) {
+        const arrayFiltered = moviesDB.filter ( (movie) => {
+          return movie.genre === categoryid;
+        });
+        resolve(arrayFiltered);
+      }      
+      else {
+        resolve(moviesDB);
+      }      
+    }, 700);
   });
 }
 
+// Array.filter: filtra los elementos de un array
+
 function ItemListContainer( { titulo } ) {   
   const [moviesEstado, setMovies] = useState([]);
+  const { categoryid } = useParams();
 
   useEffect( () => {
-    getMovies().then( respuestaPromise => {
+    getMovies(categoryid).then( respuestaPromise => {
       setMovies(respuestaPromise);
     });
-  }, []);
+  }, [categoryid]);
 
   return (
     <section className="text-gray-600 body-font">

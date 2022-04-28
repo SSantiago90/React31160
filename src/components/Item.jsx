@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 const Item = ({ movie }) => {
 	return (
@@ -18,9 +19,11 @@ const Item = ({ movie }) => {
 					<h2 className="mb-4">${movie.price}</h2>
 				</span>
 				<p className="leading-relaxed text-base">{movie.genre}</p>
-				<button className="text-indigo-500 inline-flex items-center mt-3">
-					Ver más
-				</button>
+				<Link to={`/movie/${movie.id}`}>
+					<button className="text-indigo-500 inline-flex items-center mt-3">
+						Ver más
+					</button>
+				</Link>
 			</div>
 		</div>
 	);
