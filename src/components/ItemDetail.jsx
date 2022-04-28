@@ -1,6 +1,6 @@
-import React from "react";
+import ItemCount from "./ItemCount";
 
-const Item = ({ movie }) => {
+const ItemDetail = ({ movie }) => {
 	return (
 		<div className="xl:w-1/3 md:w-1/2 p-4">
 			<div className="shadow-lg bg-gray-100 p-6 rounded-lg">
@@ -18,12 +18,10 @@ const Item = ({ movie }) => {
 					<h2 className="mb-4">${movie.price}</h2>
 				</span>
 				<p className="leading-relaxed text-base">{movie.genre}</p>
-				<button className="text-indigo-500 inline-flex items-center mt-3">
-					Ver más
-				</button>
+                <ItemCount stock={movie.stock} initial={1}/>
 			</div>
 		</div>
 	);
 };
 
-export default Item;
+export default ItemDetail;
