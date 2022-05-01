@@ -19,13 +19,15 @@ function getMovies(categoryid) {
   });
 }
 
-// Array.filter: filtra los elementos de un array
-
 function ItemListContainer( { titulo } ) {   
+  console.log("Render ItemListContainer");
+
   const [moviesEstado, setMovies] = useState([]);
   const { categoryid } = useParams();
 
   useEffect( () => {
+    console.log("Use Effect ItemListContainer");
+
     getMovies(categoryid).then( respuestaPromise => {
       setMovies(respuestaPromise);
     });

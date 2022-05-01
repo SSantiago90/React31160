@@ -15,10 +15,12 @@ function getMovie(id) {
 }
 
 function ItemListContainer() {   
+  console.log("render componente ItemDetailContainer");
   const [movie, setMovie] = useState([]);
   const { itemid } = useParams();
 
   useEffect( () => {
+    console.log("Use Effect ItemDetailContainer");
     getMovie(itemid).then( respuestaPromise => {
       setMovie(respuestaPromise);
     });
