@@ -1,6 +1,14 @@
 import ItemCount from "./ItemCount";
+import { useState } from "react";
 
 const ItemDetail = ({ movie }) => {
+	const [isInCart, setIsInCart] = useState(false);
+
+	function onAdd(count){
+		console.log(`Agregaste al carrito ${count} items.`);
+		setIsInCart(true);
+	}
+
 	return (
 		<div className="xl:w-1/3 md:w-1/2 p-4">
 			<div className="shadow-lg bg-gray-100 p-6 rounded-lg">
@@ -18,7 +26,13 @@ const ItemDetail = ({ movie }) => {
 					<h2 className="mb-4">${movie.price}</h2>
 				</span>
 				<p className="leading-relaxed text-base">{movie.genre}</p>
-                <ItemCount stock={movie.stock} initial={1}/>
+
+				{ isInCart? 
+					<button>Ir al carrito</button>
+				: 
+					<ItemCount onAdd={onAdd} stock={movie.stock} initial={1}/>
+				}
+				
 			</div>
 		</div>
 	);

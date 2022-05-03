@@ -14,13 +14,12 @@ function getMovie(id) {
   });  
 }
 
-function ItemListContainer() {   
-  console.log("render componente ItemDetailContainer");
+function ItemDetailContainer() {   
+
   const [movie, setMovie] = useState([]);
   const { itemid } = useParams();
 
   useEffect( () => {
-    console.log("Use Effect ItemDetailContainer");
     getMovie(itemid).then( respuestaPromise => {
       setMovie(respuestaPromise);
     });
@@ -33,4 +32,4 @@ function ItemListContainer() {
   )
 }
 
-export default ItemListContainer
+export default ItemDetailContainer

@@ -1,7 +1,7 @@
 const movies = [
   {
     id: 1,
-    imgUrl: "/imagenes/peliculas/1.jpg",
+    imgUrl: "http://1.bp.blogspot.com/-qxM5EzxDDBU/UVA4Xc6uuCI/AAAAAAAAhzw/4WUUzyrWc1Q/s1600/wolverine-poster1.jpg",
     title: "Wolverine, The",
     genre: "Action",
     stock: 28,
@@ -9,7 +9,7 @@ const movies = [
     year: 1937
   },
   {
-    id: 222222,
+    id: 2,
     imgUrl: "https://alchetron.com/cdn/Paper-Man-2009-film-images-7097ff47-dd6a-4767-8236-3a1d2f0ec9a.jpg",
     title: "Paper Man",
     genre: "Comedy",
