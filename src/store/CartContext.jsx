@@ -13,6 +13,7 @@ const { Provider } = CartContext;
 // ! 3_ limpiar todo del carrito
 // ! 4_ comprobar si X item está en el carrito ---> Array.some()
 // * 5_ devolver la cantidad de items en el carrito
+// * 5_ devolver el costo total de la compra
 
 export function CartContextProvider({children}) {
     const [cart, setCart] = useState([]);
@@ -51,7 +52,18 @@ export function CartContextProvider({children}) {
 
     const contextFunction = () => console.log("Contexto listo!");
 
-    const cantInCart = () => false;
+    // navbar
+    const cantInCart = () => {
+        const total = 0;
+        
+        return total;
+    }
+
+    // 
+    const calcPriceCart = () => {
+        const total = 0;
+        return total;
+    }
 
     return(
         <Provider value={ { contextFunction, cart, addToCart, removeFromCart} }>
