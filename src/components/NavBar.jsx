@@ -2,12 +2,7 @@ import imgLogo from '../assets/img/brand-logo-t.png';
 import CartWidget from './CartWidget';
 import { Link } from 'react-router-dom';
 
-import useCartContext from '../store/CartContext';
-
 function NavBar(){
-    const { contextFunction } = useCartContext();
-    
-    contextFunction();
     return(
         <header className=" bg-yellow-300 container-fluid shadow-xl text-gray-600 body-font mb-5">
         <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -21,7 +16,7 @@ function NavBar(){
             <Link to="/category/Horror" className="mr-5 hover:text-gray-900">Horror</Link>
             <Link to="/category/Romance" className="mr-5 hover:text-gray-900">Romance</Link>
           </nav>
-          <div>
+          <div className="flex flex-wrap  md:pl-4 md:border-l justify-between md:border-gray-400 items-baseline">
               <CartWidget />
           </div>
         </div>
