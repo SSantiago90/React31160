@@ -2,8 +2,32 @@ import React from "react";
 import CartItem from "./CartItem";
 import useCartContext from "../store/CartContext";
 import { Link } from "react-router-dom";
+import { createBuyOrder } from "../data";
+
 const CartView = () => {
-	const { cart, removeFromCart } = useCartContext();
+	const { cart, removeFromCart, clearCart, getTotalPrice } = useCartContext();
+
+	function handleBuy() {
+		const itemsToBuy = cart.map((item) => ({
+			title: item.title,
+			cant: item.cant,
+			price: item.price,
+			id: item.id,
+		}));
+
+		const buyOrder = {
+			buyer: {
+				name: "Santiago",
+				phone: "123456789",
+				email: "santiago@coder.com",
+			},
+			items: itemsToBuy,
+			total: getTotalPrice(),
+		};
+
+		createBuyOrder(buyOrder);
+		clearCart();
+	}
 
 	return (
 		<section className="text-gray-600 body-font">
@@ -66,7 +90,10 @@ const CartView = () => {
 								</tbody>
 							</table>
 							<div className="mt-8">
-								<button className="flex mx-auto mt-2 text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">
+								<button
+									onClick={handleBuy}
+									className="flex mx-auto mt-2 text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg"
+								>
 									¡Comprar!
 								</button>
 							</div>

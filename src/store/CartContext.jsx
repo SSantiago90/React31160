@@ -45,16 +45,15 @@ export function CartContextProvider({ children }) {
 		return cart.find((itemCart) => itemCart.id === id);
 	};
 
-	
 	const cantInCart = () => {
 		return cart.reduce((acc, item) => acc + item.cant, 0);
 	};
 
 	function getTotalPrice() {
-        let totalPrice = 0;
-        cart.forEach(item => totalPrice += item.qty * item.price)
-        return totalPrice;
-    }
+		let totalPrice = 0;
+		cart.forEach((item) => (totalPrice += item.cant * item.price));
+		return totalPrice;
+	}
 	return (
 		<Provider
 			value={{
@@ -65,7 +64,7 @@ export function CartContextProvider({ children }) {
 				cart,
 				addToCart,
 				removeFromCart,
-				isInCart
+				isInCart,
 			}}
 		>
 			{children}
