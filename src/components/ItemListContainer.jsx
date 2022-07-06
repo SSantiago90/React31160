@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
-import { getAllItems as getMovies, getItemsByCategory } from "../data";
+import { getAllItems as getMovies, saveDoc, getItemsByCategory } from "../data";
 
 function ItemListContainer({ titulo }) {
 	const [moviesEstado, setMovies] = useState([]);
@@ -19,6 +19,7 @@ function ItemListContainer({ titulo }) {
 		}
 	}, [categoryid]);
 
+
 	return (
 		<section className="text-gray-600 body-font">
 			<div className="container px-5 py-12 mx-auto">
@@ -30,6 +31,7 @@ function ItemListContainer({ titulo }) {
 				</div>
 			</div>
 			<ItemList movies={moviesEstado} />
+			<button onClick={saveDoc}>Guardar Item</button>
 		</section>
 	);
 }

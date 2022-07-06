@@ -10,6 +10,8 @@ import {
 	collection,
 	Timestamp,
 	getDocs,
+	writeBatch,
+	documentId
 } from "firebase/firestore/lite";
 
 const firebaseConfig = {
@@ -176,17 +178,68 @@ export async function dataToFirebase() {
 	});
 }
 
-export async function createBuyOrder(orderData){
-	const buyTimestamp  = Timestamp.now();
+export async function saveDoc() {
+	const movie = {
+		id: 8,
+		imgUrl:
+			"https://cdn.shopify.com/s/files/1/0057/3728/3618/products/d696cc9b221622584a249858dbe6ce61_d9a5a51d-3154-4e94-b981-bf01b103d34c_480x.progressive.jpg?v=1573590455",
+		title: "Hellraiser: Inferno",
+		genre: "Horror",
+		year: 1998,
+		price: 7.01,
+		stock: 39,
+	};
+
+	const miColeccion = collection(firestoreDB, "movies");
+	const newDoc = doc(miColeccion);
+	setDoc(newDoc, movie).then(() => {
+		console.log("Document written with id: ", newDoc.id);
+	});
+}
+
+export async function createBuyOrder(orderData) {
+	const buyTimestamp = Timestamp.now();
 
 	const orderWithDate = {
-		...orderData, 
-		date: buyTimestamp
+		...orderData,
+		date: buyTimestamp,
 	};
 
 	const miColec = collection(firestoreDB, "buyOrders");
-	const orderDoc = await addDoc(miColec, orderWithDate);	
-
+	const orderDoc = await addDoc(miColec, orderWithDate);
 	console.log("Orden lista con el ID:", orderDoc.id);
+
+	
+}
+
+export async function createBuyOrderAndUpdateStock(orderData) {
+	const batch = writeBatch();
+	const buyTimestamp = Timestamp.now();
+
+	const orderWithDate = {
+		...orderData,
+		date: buyTimestamp,
+	};
+
+	const colecOrders = collection(firestoreDB, "buyOrders");	
+	const colecItems = collection(firestoreDB, 'movies')
+	const orderDoc = await addDoc(colecOrders, orderWithDate);
+
+	const q = query(colecItems, where(documentId(), 'in', orderData.items.map(el => el.id)))
+
+	getDocs(q).then( res => {
+		res.docs.forEach((doc) => {			
+			const itemToUpdate = orderData.items.find((prod) => prod.id === doc.id)		
+		
+			batch.update(doc.ref, {
+					stock: doc.data().stock - itemToUpdate.qnty
+			})
+		})
+
+		batch.commit();		
+	});
+
+	const order = await addDoc(colecOrders, orderWithDate)
+	console.log("Orden lista con el ID:", order.id);
 
 }

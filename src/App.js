@@ -17,7 +17,7 @@ function App() {
               <Route path="/category/:categoryid" element={<ItemListContainer titulo="Categoría de Productos" />} />
               <Route path="/cart" element={<CartView />} />
             </Routes>         
-        </BrowserRouter>
+        </BrowserRouter>     
       </CartContextProvider>
     </div>
   );
